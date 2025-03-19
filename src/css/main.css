@@ -65,7 +65,7 @@
       background-size: cover;
       .words{
         width:85%;
-        height: 420px;
+        height: auto;
         background-color: white;
         border-radius: 10px;
         opacity: 0;
