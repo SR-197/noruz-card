@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تبریک نوروز</title>
+  <link rel="stylesheet" href="./src/css/main.css">
+</head>
+<body>
+
+  <div class="click">
+    <h1>🎊</h1>
+    <h3 class="click-btn">click on box below</h3>
+    <h1>🎊</h1>
+  </div>
+  <div class="product" id="product-card">
+    <div class="words">
+      <p>
+        فرارسیدن نوروز باستانی، سرآغاز رویش و بالندگی طبیعی، شکوه و جلوه زندگانی را به شما و خانواده محترمتان صمیمانه شادباش می گویم وسالی سرشار از خیر و خوشبختی را برای شما آرزومندم. و پاسداشت پاکی ها ، نیکی ها و پهلوانی ها بر همه ایرانیان نیکوسرشت خجسته باد <br> تا جهان باقی است این آئین جهان افروز باد 
+      </p>
+    </div>
+    
+      <audio class="audio" id="playing-audio" src="./src/audio/nowruz-saz-o-dohol.mp3" controls></audio>
+    
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const btnproduct = document.querySelector(".product");
+
+        // Add a click event listener to the `.product` element
+        btnproduct.addEventListener("click", () => {
+          const duration = 15 * 1000; // Fireworks duration: 15 seconds
+          const animationEnd = Date.now() + duration;
+          const defaults = {
+            startVelocity: 30,
+            spread: 360,
+            ticks: 60,
+            zIndex: 9999,
+          };
+
+          // Function to generate random values within a range
+          function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+          }
+
+          // Fire confetti repeatedly during the duration
+          const interval = setInterval(() => {
+            const timeLeft = animationEnd - Date.now();
+
+            if (timeLeft <= 0) {
+              clearInterval(interval); // Stop firing confetti after the duration
+              return;
+            }
+
+            const particleCount = 50 * (timeLeft / duration); // Gradually reduce particles
+
+            // Fire confetti from multiple locations
+            confetti(
+              Object.assign({}, defaults, {
+                particleCount,
+                origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+              })
+            );
+            confetti(
+              Object.assign({}, defaults, {
+                particleCount,
+                origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+              })
+            );
+          }, 250);
+
+          // Ensure confetti canvas stays on top
+          setTimeout(() => {
+            const confettiCanvas = document.querySelector("canvas");
+            if (confettiCanvas) {
+              confettiCanvas.style.position = "fixed"; // Fix it to the viewport
+              confettiCanvas.style.top = "0";
+              confettiCanvas.style.left = "0";
+              confettiCanvas.style.width = "100%";
+              confettiCanvas.style.height = "100%";
+              confettiCanvas.style.zIndex = "9999"; // Make sure it appears above all elements
+              confettiCanvas.style.pointerEvents = "none"; // Prevent it from blocking clicks
+            }
+          }, 0);
+        });
+      });
+
+      const audio = document.getElementById('playing-audio');
+        const playButton = document.getElementById('product-card');
+
+        // Add a click event listener to the button
+        playButton.addEventListener('click', () => {
+            audio.play()
+                .then(() => {
+                    console.log('Audio is playing');
+                })
+                .catch(error => {
+                    console.error('Error playing audio:', error);
+                });
+        });
+    </script>
+  
+</body>
+</html>
