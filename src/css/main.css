@@ -46,7 +46,7 @@
     }
     .product {
       width: 370px;
-      height: auto;
+      min-height: 400px;
       background-color: white;
       margin: 30px auto;
       position: relative;
