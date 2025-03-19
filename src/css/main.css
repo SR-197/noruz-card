@@ -60,7 +60,9 @@
       justify-content: center;
       cursor: pointer;
       background-image: url(../images/nowruzpic.parspng.com-18-scaled.jpg);
-      background-size: contain;
+      
+      background-repeat: no-repeat;
+      background-size: cover;
       .words{
         width:85%;
         height: 420px;
